@@ -3,19 +3,20 @@
 # N번 집은 N-1 집과 색이 겹치지 않음
 # 앞 뒤 집과 색이 겹치면 안됨
 
-n = int(input())
-arr = []
-for _ in range(n):
-    arr.append(list(map(int, input().split())))
+from sys import stdin
+input = stdin.readline
 
-dp = [[0]*3 for _ in range(n)]
-dp[0] = arr[0]
+n = int(input())
+arr = [0] * n
+
+for i in range(n):
+    arr[i] = list(map(int, input().split()))
 
 for i in range(1, n):
-    dp[i][0] = min(dp[i-1][1], dp[i-1][2]) + arr[i][0]
-    dp[i][1] = min(dp[i-1][0], dp[i-1][2]) + arr[i][1]
-    dp[i][2] = min(dp[i-1][0], dp[i-1][1]) + arr[i][2]
-
-print(min(dp[n-1]))
+    arr[i][0] = min(arr[i-1][1], arr[i-1][2]) + arr[i][0]
+    arr[i][1] = min(arr[i-1][0], arr[i-1][2]) + arr[i][1]
+    arr[i][2] = min(arr[i-1][0], arr[i-1][1]) + arr[i][2]
+    
+print(min(arr[n-1][0], arr[n-1][1], arr[n-1][2]))
     
 
