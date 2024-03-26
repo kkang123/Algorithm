@@ -1,7 +1,7 @@
 function solution(my_string) {
-    var answer = my_string.split("");
+    const answer = my_string.split("");
     
-    var answer_reverse = answer.reverse();
+    const answer_reverse = answer.reverse();
     return answer_reverse.join('');
 }
 
