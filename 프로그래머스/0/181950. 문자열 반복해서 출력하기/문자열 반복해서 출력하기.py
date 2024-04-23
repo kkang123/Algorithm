@@ -4,3 +4,5 @@ n = int(n)
 res = str * n
 
 print(res)
+
+# print(str * int(n))
