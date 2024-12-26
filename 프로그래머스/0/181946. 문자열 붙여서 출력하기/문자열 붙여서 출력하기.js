@@ -12,5 +12,19 @@ rl.on('line', function (line) {
     str1 = input[0];
     str2 = input[1];
     
-    console.log(`${str1}${str2}`)
+    // 백틱
+    // console.log(`${str1}${str2}`)
+    
+    // 일반 합치기
+    // const res = str1 + str2
+    // console.log(res)
+    
+    // concat() 함수
+    // const res = str1.concat(str2)
+    // console.log(res);
+    
+    // join() 함수
+    const res = input.join('');
+    console.log(res);
+    
 });
