@@ -7,3 +7,9 @@ function solution(my_string) {
     
     return answer.sort();
 }
+
+
+// function solution(my_string) {
+//     let answer = my_string.split('').map((_, i) => my_string.slice(i)).sort();
+//     return answer;
+// }
