@@ -13,3 +13,9 @@ console.log(first);
 console.log(second);
 console.log(third);
 console.log(input[0] * input[1]);
+
+
+let input = require('fs').readFileSync('/dev/stdin').toString().split('\n').map(Number);
+
+이렇게하면 사용하기 편리할듯
+
