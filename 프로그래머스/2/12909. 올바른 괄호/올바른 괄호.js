@@ -1,16 +1,10 @@
 function solution(s){
-    let res = []
-    
-    for(let i = 0; i < s.length; i++){
-        if(s[i] === "("){
-            res.push(s[i])
-        } else {
-            if(res.length === 0){
-                return false
-            } else {
-                res.pop()
-            }
-        } 
+    let cum = 0
+    for (let paren of s) {
+        cum += paren === '('? 1: -1
+        if(cum < 0) {
+            return false
+        }
     }
-    return res.length === 0 ? true : false
+    return cum === 0? true: false;
 }
