@@ -1,80 +1,31 @@
-const input = require("fs")
-  .readFileSync("/dev/stdin")
-  .toString()
-  .trim()
-  .split("\n");
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+const N = Number(input[0]);
+let queue = [];
+let head = 0;
+let output = [];
 
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
+for (let i = 1; i <= N; i++) {
+  let command = input[i].split(" ");
+  switch (command[0]) {
+    case "push":
+      queue.push(Number(command[1]));
+      break;
+    case "pop":
+      output.push(queue.length > head ? queue[head++] : -1);
+      break;
+    case "size":
+      output.push(queue.length - head);
+      break;
+    case "empty":
+      output.push(queue.length - head === 0 ? 1 : 0);
+      break;
+    case "front":
+      output.push(queue.length > head ? queue[head] : -1);
+      break;
+    case "back":
+      output.push(queue.length > head ? queue[queue.length - 1] : -1);
+      break;
   }
 }
 
-class Queue {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
-
-  push(value) {
-    const node = new Node(value);
-    if (!this.head) {
-      this.head = this.tail = node;
-    } else {
-      this.tail.next = node;
-      this.tail = node;
-    }
-    this.size++;
-  }
-
-  pop() {
-    if (!this.head) return -1;
-    const value = this.head.value;
-    this.head = this.head.next;
-    if (!this.head) this.tail = null;
-    this.size--;
-    return value;
-  }
-
-  front() {
-    return this.head ? this.head.value : -1;
-  }
-
-  back() {
-    return this.tail ? this.tail.value : -1;
-  }
-
-  empty() {
-    return this.size === 0 ? 1 : 0;
-  }
-
-  getSize() {
-    return this.size;
-  }
-}
-
-const T = Number(input.shift());
-const queue = new Queue();
-const res = [];
-
-for (let i = 0; i < T; i++) {
-  const line = input[i];
-  if (line.startsWith("push")) {
-    const [, num] = line.split(" ");
-    queue.push(Number(num));
-  } else if (line === "front") {
-    res.push(queue.front());
-  } else if (line === "back") {
-    res.push(queue.back());
-  } else if (line === "size") {
-    res.push(queue.getSize());
-  } else if (line === "empty") {
-    res.push(queue.empty());
-  } else if (line === "pop") {
-    res.push(queue.pop());
-  }
-}
-
-console.log(res.join("\n"));
+console.log(output.join("\n"));
