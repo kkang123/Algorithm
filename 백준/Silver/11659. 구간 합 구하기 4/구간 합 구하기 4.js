@@ -1,20 +1,21 @@
-const input = require("fs")
-  .readFileSync("/dev/stdin")
-  .toString()
-  .trim()
-  .split("\n");
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
 
-const [N, M] = input.shift().split(" ").map(Number);
-const arr = input.shift().split(" ").map(Number);
+const [N, M] = input[0].split(" ").map(Number);
+const numbers = input[1].split(" ").map(Number);
 
-const prefixSum = [0];
-for (let i = 0; i < N; i++) {
-  prefixSum[i + 1] = prefixSum[i] + arr[i];
-}
 
-const res = [];
-for (let a = 0; a < M; a++) {
-  const [i, j] = input[a].split(" ").map(Number);
-  res.push(prefixSum[j] - prefixSum[i - 1]);
-}
-console.log(res.join("\n"));
+const prefixSum = numbers.reduce(
+  (acc, cur) => {
+    acc.push(acc[acc.length - 1] + cur);
+    return acc;
+  },
+  [0]
+);
+
+const result = input.slice(2).map(line => {
+  const [i, j] = line.split(" ").map(Number);
+  return prefixSum[j] - prefixSum[i - 1];
+});
+
+console.log(result.join("\n"));
